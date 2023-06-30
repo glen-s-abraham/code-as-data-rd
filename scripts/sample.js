@@ -6,6 +6,8 @@ const url = "mongodb://localhost:27017";
 const dbName = "sample-db";
 const collectionName = "users";
 
+console.log(input);
+
 // Sample data to be inserted
 const sampleData = [
   { name: "John", age: 30 },
@@ -28,9 +30,12 @@ async function connectToDatabase() {
     const data = await collection.insertMany(sampleData);
     await client.close();
     console.log("Disconnected from the MongoDB database");
+    return "data added"
   } catch (error) {
     console.error("Error connecting to the MongoDB database:", error);
   }
 }
 
 connectToDatabase();
+
+output['res'] = 'test' 

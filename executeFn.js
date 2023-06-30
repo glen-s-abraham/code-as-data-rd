@@ -2,11 +2,11 @@ const fs = require("fs");
 const path = require("path");
 const Function = require("./models/function-schema");
 const mongoose = require("mongoose");
-const { NodeVM,VM } = require("vm2");
+const { NodeVM, VM } = require("vm2");
 
 (async () => {
-//   await mongoose.connect("mongodb://localhost:27017/function-service");
-//   console.log("connected to db");
+  //   await mongoose.connect("mongodb://localhost:27017/function-service");
+  //   console.log("connected to db");
   //const { code } = await Function.findById("649ac644455aa2f658bdf227");
   //vm.run(`(${code})()`);
   const fn = fs.readFileSync(
@@ -14,14 +14,18 @@ const { NodeVM,VM } = require("vm2");
     "utf8"
   );
 
-  
   const vm = new NodeVM({
-    sandbox: {},
+    sandbox: {
+      input: { test: "test" },
+      output: {},
+    },
     require: {
       external: true, // Enable loading external modules
     },
   });
-  vm.run(fn,'chakka.js');
+  vm.run(fn, "script.js");
+
+  console.log(vm);
 
   await mongoose.disconnect();
 })();
