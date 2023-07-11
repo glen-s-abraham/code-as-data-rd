@@ -11,8 +11,8 @@ const mongoose = require("mongoose");
   const fn = fs.readFileSync(path.join(__dirname,'/scripts/sample.js'),'utf-8')
 
   const newFunction = new Function({
-    name: "scriptFile",
-    code: fn,
+    name: "filter-even",
+    code: "input",
     dependencies: ["mongodb"],
     metadata: { timeout: 5000 },
   });
